@@ -1,10 +1,11 @@
 package model.repository;
 
+import common.dto.CandidatDto;
 import model.Candidat;
 
 import java.util.List;
 
 public interface Candidats {
-    Candidat getCandidatById(String id);
-    List<Candidat> recupererTousLesCandidats();
+    CandidatDto getCandidatById(String id);
+    List<CandidatDto> recupererTousLesCandidats();
 }

@@ -1,8 +1,13 @@
 package use_case;
 
+import common.dto.CandidatDto;
 import infrastructure.exception.AucunRecruteurAdapte;
 import infrastructure.exception.AucuneSalleLibre;
 import model.*;
+import model.repository.Candidats;
+import model.repository.Entretiens;
+import model.repository.Recruteurs;
+import model.repository.Salles;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,7 +19,7 @@ public class PlanifierEntretien {
     private final model.repository.Recruteurs recruteurRepository;
     private final model.repository.Salles salles;
 
-    public PlanifierEntretien(model.repository.Candidats candidats, model.repository.Entretiens entretienRepository, model.repository.Recruteurs recruteurRepository, model.repository.Salles salles) {
+    public PlanifierEntretien(Candidats candidats, Entretiens entretienRepository, Recruteurs recruteurRepository, Salles salles) {
         this.candidats = candidats;
         this.entretienRepository = entretienRepository;
         this.recruteurRepository = recruteurRepository;
@@ -23,7 +28,7 @@ public class PlanifierEntretien {
 
     public void planifier(PlanificateurRequest request) throws AucunRecruteurAdapte, AucuneSalleLibre {
         // Given
-        Candidat candidat = candidats.getCandidatById(request.getCandidatId());
+        CandidatDto candidat = candidats.getCandidatById(request.getCandidatId());
         List<Recruteur> recruteurs = recruteurRepository.recupererTousLesRecruteurs();
         List<Salle> salles = this.salles.recupererToutesLesSalles();
 
@@ -38,25 +43,9 @@ public class PlanifierEntretien {
         entretienRepository.add(entretien);
     }
 
-    private Salle getSallePourDate(List<Salle> salles, LocalDateTime dateEntretien) throws AucuneSalleLibre {
-        final List<Salle> sallesLibres = salles.stream()
-                .filter((salle) -> estLibre(salle, dateEntretien))
-                .collect(Collectors.toList());
-
-        if(sallesLibres.size() == 0) {
-            throw new AucuneSalleLibre("Aucune salle libre");
-        }
-
-        return sallesLibres.get(0);
-    }
-
-    private boolean estLibre(Salle salle, LocalDateTime dateEntretien) {
-        return salle.getDisponibilites().contains(dateEntretien);
-    }
-
-    private Recruteur getRecruteurPourCandidat(List<Recruteur> recruteurs, Candidat candidat, LocalDateTime dateEntretien) throws AucunRecruteurAdapte {
+    private Recruteur getRecruteurPourCandidat(List<Recruteur> recruteurs, CandidatDto candidat, LocalDateTime dateEntretien) throws AucunRecruteurAdapte {
         final List<Recruteur> recruteursAdaptes = recruteurs.stream()
-                .filter((recruteur) -> estAdaptePourCandidat(recruteur, candidat, dateEntretien))
+                .filter((recruteur) -> recruteur.peutTesterCandidat(candidat, dateEntretien))
                 .collect(Collectors.toList());
 
         if(recruteursAdaptes.size() == 0) {
@@ -66,9 +55,15 @@ public class PlanifierEntretien {
         return recruteursAdaptes.get(0);
     }
 
-    private boolean estAdaptePourCandidat(Recruteur recruteur, Candidat candidat, LocalDateTime dateEntretien) {
-        return recruteur.estDisponible(dateEntretien) &&
-                recruteur.getCompetence().equals(candidat.getCompetence()) &&
-                recruteur.getNbAnneeExperience() > candidat.getNbAnneeExperience();
+    private Salle getSallePourDate(List<Salle> salles, LocalDateTime dateEntretien) throws AucuneSalleLibre {
+        final List<Salle> sallesLibres = salles.stream()
+                .filter((salle) -> salle.estLibre(dateEntretien))
+                .collect(Collectors.toList());
+
+        if(sallesLibres.size() == 0) {
+            throw new AucuneSalleLibre("Aucune salle libre");
+        }
+
+        return sallesLibres.get(0);
     }
 }

@@ -1,19 +1,21 @@
 package model;
 
+import common.dto.CandidatDto;
+
 import java.util.Date;
 
 public class Entretien {
-    private Candidat candidat;
+    private CandidatDto candidat;
     private Recruteur recruteur;
     private Salle salle;
 
-    public Entretien(Candidat candidat, Recruteur recruteur, Salle salle) {
+    public Entretien(CandidatDto candidat, Recruteur recruteur, Salle salle) {
         this.candidat = candidat;
         this.recruteur = recruteur;
         this.salle = salle;
     }
 
-    public Candidat getCandidat() {
+    public CandidatDto getCandidat() {
         return candidat;
     }
 
@@ -24,4 +26,6 @@ public class Entretien {
     public Salle getSalle() {
         return salle;
     }
+
+
 }

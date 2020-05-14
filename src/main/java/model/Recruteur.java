@@ -1,5 +1,7 @@
 package model;
 
+import common.dto.CandidatDto;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,5 +32,11 @@ public class Recruteur {
 
     public int getNbAnneeExperience() {
         return nbAnneeExperience;
+    }
+
+    public boolean peutTesterCandidat(CandidatDto candidat, LocalDateTime dateEntretien) {
+        return this.estDisponible(dateEntretien) &&
+                this.getCompetence().equals(candidat.getCompetence()) &&
+                this.getNbAnneeExperience() > candidat.getNbAnneeExperience();
     }
 }

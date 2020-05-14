@@ -14,4 +14,7 @@ public class Salle {
         return disponibilites;
     }
 
+    public boolean estLibre(LocalDateTime dateEntretien) {
+        return this.getDisponibilites().contains(dateEntretien);
+    }
 }

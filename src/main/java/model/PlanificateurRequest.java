@@ -1,12 +1,14 @@
 package model;
 
+import common.dto.CandidatDto;
+
 import java.time.LocalDateTime;
 
 public class PlanificateurRequest {
-    private Candidat candidat;
+    private CandidatDto candidat;
     private LocalDateTime dateEntretien;
 
-    public PlanificateurRequest(Candidat candidat, LocalDateTime dateEntretien) {
+    public PlanificateurRequest(CandidatDto candidat, LocalDateTime dateEntretien) {
         this.candidat = candidat;
         this.dateEntretien = dateEntretien;
     }
