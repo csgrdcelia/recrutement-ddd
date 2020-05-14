@@ -2,17 +2,16 @@ package infrastructure.implementation;
 
 import model.Candidat;
 import model.Recruteur;
+import model.repository.Recruteurs;
 
 import java.util.List;
 
-public class RecruteursImpl implements model.repository.Recruteurs {
-    @Override
+public class RecruteursImpl implements Recruteurs {
     public List<Recruteur> getAllRecruteurs() {
-        return null; //TODO: implement
+        return null;
     }
 
-    @Override
     public Recruteur getRecruteurForCandidat(List<Recruteur> recruteurs, Candidat candidat) {
-        return null; //TODO: implement
+        return null;
     }
 }
