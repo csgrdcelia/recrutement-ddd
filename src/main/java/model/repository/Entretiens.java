@@ -1,7 +1,7 @@
 package model.repository;
 
-import model.Entretien;
+import common.dto.EntretienDto;
 
 public interface Entretiens {
-    void add(Entretien entretien);
+    void add(EntretienDto entretien);
 }

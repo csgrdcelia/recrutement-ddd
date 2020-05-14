@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface Candidats {
     CandidatDto getCandidatById(String id);
-    List<CandidatDto> recupererTousLesCandidats();
 }

@@ -1,11 +1,9 @@
 package model.repository;
 
-import model.Candidat;
-import model.Recruteur;
-
+import common.dto.RecruteurDto;
 import java.util.List;
 
 public interface Recruteurs {
 
-    List<Recruteur> recupererTousLesRecruteurs();
+    List<RecruteurDto> findAll();
 }

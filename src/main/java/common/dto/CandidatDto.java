@@ -1,5 +1,7 @@
 package common.dto;
 
+import java.util.UUID;
+
 public class CandidatDto {
     private String id;
     private String nom;
@@ -7,6 +9,7 @@ public class CandidatDto {
     private int nbAnneeExperience;
 
     public CandidatDto(String nom, String competence) {
+        this.id = UUID.randomUUID().toString();
         this.nom = nom;
         this.competence = competence;
     }

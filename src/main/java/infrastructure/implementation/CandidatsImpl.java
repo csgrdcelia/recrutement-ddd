@@ -13,12 +13,12 @@ public class CandidatsImpl implements Candidats {
     private final List<CandidatDto> allCandidats = new ArrayList<>(Arrays.asList(new CandidatDto("Arthur", "java"),
             new CandidatDto("Vincent", "python"), new CandidatDto("Alexis", "php")));
 
-    public Candidat getCandidatById(String id) {
+    public CandidatDto getCandidatById(String id) {
         return null;
     }
 
     @Override
-    public List<Candidat> recupererTousLesCandidats() {
+    public List<CandidatDto> recupererTousLesCandidats() {
         return allCandidats;
     }
 }
