@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface Recruteurs {
 
-    List<Recruteur> getAllRecruteurs();
-
-    Recruteur getRecruteurForCandidat(List<Recruteur> recruteurs, Candidat candidat);
+    List<Recruteur> recupererTousLesRecruteurs();
 }

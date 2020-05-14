@@ -4,14 +4,19 @@ import model.Salle;
 import model.repository.Salles;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SallesImpl implements Salles {
-    public List<Salle> getAllSalles() {
-        return null;
-    }
+    private final List<Salle> salles = new ArrayList<>(Arrays.asList(
+            new Salle(new ArrayList<>(Arrays.asList(LocalDateTime.now()))),
+            new Salle(new ArrayList<>(Arrays.asList(LocalDateTime.now()))),
+            new Salle(new ArrayList<>(Arrays.asList(LocalDateTime.now()))),
+            new Salle(new ArrayList<>(Arrays.asList(LocalDateTime.now()))),
+            new Salle(new ArrayList<>(Arrays.asList(LocalDateTime.now())))));
 
-    public Salle getSalleForDate(List<Salle> salles, LocalDateTime dateEntretien) {
-        return null;
+    public List<Salle> recupererToutesLesSalles() {
+        return salles;
     }
 }

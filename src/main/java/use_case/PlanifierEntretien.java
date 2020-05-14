@@ -24,8 +24,8 @@ public class PlanifierEntretien {
     public void planifier(PlanificateurRequest request) throws AucunRecruteurAdapte, AucuneSalleLibre {
         // Given
         Candidat candidat = candidats.getCandidatById(request.getCandidatId());
-        List<Recruteur> recruteurs = recruteurRepository.getAllRecruteurs();
-        List<Salle> salles = this.salles.getAllSalles();
+        List<Recruteur> recruteurs = recruteurRepository.recupererTousLesRecruteurs();
+        List<Salle> salles = this.salles.recupererToutesLesSalles();
 
         LocalDateTime dateEntretien = request.getDateEntretien();
         Recruteur recruteurAdapte = getRecruteurPourCandidat(recruteurs, candidat, dateEntretien);
