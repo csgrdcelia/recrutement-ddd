@@ -8,10 +8,11 @@ public class Candidat {
     private String competence;
     private int nbAnneeExperience;
 
-    public Candidat(String nom, String competence) {
+    public Candidat(String nom, String competence, int nbAnneeExperience) {
         this.id = UUID.randomUUID().toString();
         this.nom = nom;
         this.competence = competence;
+        this.nbAnneeExperience = nbAnneeExperience;
     }
 
     public String getId() {

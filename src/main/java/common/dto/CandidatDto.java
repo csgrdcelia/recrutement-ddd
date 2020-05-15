@@ -8,10 +8,11 @@ public class CandidatDto {
     private String competence;
     private int nbAnneeExperience;
 
-    public CandidatDto(String id, String nom, String competence) {
+    public CandidatDto(String id, String nom, String competence, int nbAnneeExperience) {
         this.id = id;
         this.nom = nom;
         this.competence = competence;
+        this.nbAnneeExperience = nbAnneeExperience;
     }
 
     public String getId() {

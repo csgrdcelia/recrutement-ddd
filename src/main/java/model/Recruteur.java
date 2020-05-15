@@ -13,10 +13,11 @@ public class Recruteur {
     private String competence;
     private int nbAnneeExperience;
 
-    public Recruteur(List<LocalDateTime> disponibilites, String competence) {
+    public Recruteur(List<LocalDateTime> disponibilites, String competence, int nbAnneeExperience) {
         this.id = UUID.randomUUID().toString();
         this.disponibilites = disponibilites;
         this.competence = competence;
+        this.nbAnneeExperience = nbAnneeExperience;
     }
 
     public Recruteur(RecruteurDto recruteurDto) {
@@ -48,8 +49,8 @@ public class Recruteur {
         return competence;
     }
 
-    public boolean estDisponible(LocalDateTime date) {
-        return disponibilites.contains(date);
+    public boolean estDisponible(LocalDateTime dateEntretien) {
+        return this.getDisponibilites().stream().filter(disponibilite -> disponibilite.equals(dateEntretien)).count() == 1;
     }
 
     public int getNbAnneeExperience() {

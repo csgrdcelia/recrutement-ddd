@@ -4,6 +4,7 @@ import common.dto.SalleDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Salle {
     private List<LocalDateTime> disponibilites;
@@ -12,7 +13,8 @@ public class Salle {
         this.disponibilites = salleDto.getDisponibilites();
     }
 
-    public void reserver() {
+    public void reserver(LocalDateTime date) {
+        
         // TODO: remove disponibility
     }
 
@@ -25,6 +27,6 @@ public class Salle {
     }
 
     public boolean estLibre(LocalDateTime dateEntretien) {
-        return this.getDisponibilites().contains(dateEntretien);
+        return this.getDisponibilites().stream().filter(disponibilite -> disponibilite.equals(dateEntretien)).count() == 1;
     }
 }
