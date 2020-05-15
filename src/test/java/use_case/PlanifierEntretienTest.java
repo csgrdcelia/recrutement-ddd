@@ -63,11 +63,6 @@ public class PlanifierEntretienTest {
     }
 
     @Test
-    public void myTest() {
-        assertTrue(true);
-    }
-
-    @Test
     public void testMock() {
         Mockito.when(salles.findAll()).thenReturn(allSalles);
         Mockito.when(candidats.findAll()).thenReturn(allCandidats);
