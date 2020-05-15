@@ -1,10 +1,8 @@
 package model.repository;
 
 import common.dto.CandidatDto;
-import model.Candidat;
-
-import java.util.List;
+import model.entretien.CandidatId;
 
 public interface Candidats {
-    CandidatDto getCandidatById(String id);
+    CandidatDto getCandidatById(CandidatId candidatId);
 }

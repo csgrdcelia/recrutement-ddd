@@ -1,33 +1,32 @@
 package common.dto;
 
-import model.Recruteur;
-
+import model.entretien.Recruteur;
+import model.entretien.RecruteurId;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 public class RecruteurDto {
-    private String id;
+    private RecruteurId recruteurId;
     private List<LocalDateTime> disponibilites;
     private String competence;
     private int nbAnneeExperience;
 
-    public RecruteurDto(List<LocalDateTime> disponibilites, String competence, int nbAnneeExperience) {
-        this.id = UUID.randomUUID().toString();
+    public RecruteurDto(RecruteurId recruteurId, List<LocalDateTime> disponibilites, String competence, int nbAnneeExperience) {
+        this.recruteurId = recruteurId;
         this.disponibilites = disponibilites;
         this.competence = competence;
         this.nbAnneeExperience = nbAnneeExperience;
     }
 
     public RecruteurDto(Recruteur recruteur) {
-        this.id = recruteur.getId();
+        this.recruteurId = recruteur.getRecruteurId();
         this.disponibilites = recruteur.getDisponibilites();
         this.competence = recruteur.getCompetence();
         this.nbAnneeExperience = recruteur.getNbAnneeExperience();
     }
 
-    public String getId() {
-        return id;
+    public RecruteurId getRecruteurId() {
+        return recruteurId;
     }
 
     public List<LocalDateTime> getDisponibilites() {

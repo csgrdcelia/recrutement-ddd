@@ -1,27 +1,26 @@
-package model;
+package model.entretien;
 
 import common.dto.CandidatDto;
 import common.dto.RecruteurDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 public class Recruteur {
-    private String id;
+    private RecruteurId recruteurId;
     private List<LocalDateTime> disponibilites;
     private String competence;
     private int nbAnneeExperience;
 
-    public Recruteur(List<LocalDateTime> disponibilites, String competence, int nbAnneeExperience) {
-        this.id = UUID.randomUUID().toString();
+    public Recruteur(RecruteurId recruteurId, List<LocalDateTime> disponibilites, String competence, int nbAnneeExperience) {
+        this.recruteurId = recruteurId;
         this.disponibilites = disponibilites;
         this.competence = competence;
         this.nbAnneeExperience = nbAnneeExperience;
     }
 
     public Recruteur(RecruteurDto recruteurDto) {
-        this.id = recruteurDto.getId();
+        this.recruteurId = recruteurDto.getRecruteurId();
         this.disponibilites = recruteurDto.getDisponibilites();
         this.competence = recruteurDto.getCompetence();
         this.nbAnneeExperience = recruteurDto.getNbAnneeExperience();
@@ -35,11 +34,10 @@ public class Recruteur {
 
     public void reserver(LocalDateTime dateEntretien) {
         disponibilites.remove(dateEntretien);
-        //TODO: test
     }
 
-    public String getId() {
-        return id;
+    public RecruteurId getRecruteurId() {
+        return recruteurId;
     }
 
     public List<LocalDateTime> getDisponibilites() {

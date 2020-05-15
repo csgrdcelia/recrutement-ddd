@@ -1,28 +1,25 @@
-package model;
+package model.entretien;
 
 import common.dto.CandidatDto;
-import common.dto.EntretienDto;
 import common.dto.RecruteurDto;
 import common.dto.SalleDto;
 import infrastructure.exception.AucunRecruteurAdapte;
 import infrastructure.exception.AucuneSalleLibre;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Entretien {
-    private String id;
+    private EntretienId entretienId;
     private CandidatDto candidat;
     private RecruteurDto recruteur;
     private SalleDto salle;
     private LocalDateTime dateEntretien;
     private String status;
 
-    public Entretien(CandidatDto candidat, LocalDateTime dateEntretien) {
-        this.id = UUID.randomUUID().toString();
+    public Entretien(EntretienId entretienId, CandidatDto candidat, LocalDateTime dateEntretien) {
+        this.entretienId = entretienId;
         this.candidat = candidat;
         this.dateEntretien = dateEntretien;
     }
@@ -42,14 +39,17 @@ public class Entretien {
 
     public void confirmer() {
         status = "confirmé";
+        // TODO: verify
     }
 
     public void annuler() {
         status = "annulé";
+        // TODO: verify
     }
 
     public void reporter() {
         status = "reporté";
+        // TODO: verify
     }
 
     private Recruteur getRecruteurPourCandidat(List<RecruteurDto> recruteurs, CandidatDto candidat, LocalDateTime dateEntretien) throws AucunRecruteurAdapte {
@@ -79,8 +79,8 @@ public class Entretien {
         return sallesLibres.get(0);
     }
 
-    public String getId() {
-        return id;
+    public EntretienId getEntretienId() {
+        return entretienId;
     }
 
     public CandidatDto getCandidat() {

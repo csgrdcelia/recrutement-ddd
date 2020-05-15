@@ -1,7 +1,6 @@
 package infrastructure.implementation;
 
 import common.dto.EntretienDto;
-import model.Entretien;
 import model.repository.Entretiens;
 
 import java.util.ArrayList;

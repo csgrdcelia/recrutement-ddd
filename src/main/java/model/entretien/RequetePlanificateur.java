@@ -1,17 +1,17 @@
-package model;
+package model.entretien;
 
 import java.time.LocalDateTime;
 
 public class RequetePlanificateur {
-    private String id;
+    private CandidatId id;
     private LocalDateTime dateEntretien;
 
-    public RequetePlanificateur(String candidatId, LocalDateTime dateEntretien) {
+    public RequetePlanificateur(CandidatId candidatId, LocalDateTime dateEntretien) {
         this.id = candidatId;
         this.dateEntretien = dateEntretien;
     }
 
-    public String getId() {
+    public CandidatId getCandidatId() {
         return id;
     }
 

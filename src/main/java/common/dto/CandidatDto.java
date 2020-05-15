@@ -1,22 +1,21 @@
 package common.dto;
-
-import java.util.UUID;
+import model.entretien.CandidatId;
 
 public class CandidatDto {
-    private String id;
+    private CandidatId candidatId;
     private String nom;
     private String competence;
     private int nbAnneeExperience;
 
-    public CandidatDto(String id, String nom, String competence, int nbAnneeExperience) {
-        this.id = id;
+    public CandidatDto(CandidatId candidatId, String nom, String competence, int nbAnneeExperience) {
+        this.candidatId = candidatId;
         this.nom = nom;
         this.competence = competence;
         this.nbAnneeExperience = nbAnneeExperience;
     }
 
-    public String getId() {
-        return id;
+    public CandidatId getCandidatId() {
+        return candidatId;
     }
 
     public String getNom() {

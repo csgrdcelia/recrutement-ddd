@@ -1,19 +1,21 @@
-package model;
+package model.entretien;
 
 import common.dto.SalleDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Salle {
+    private SalleId salleId;
     private List<LocalDateTime> disponibilites;
 
-    public Salle(List<LocalDateTime> disponibilites) {
+    public Salle(SalleId salleId, List<LocalDateTime> disponibilites) {
+        this.salleId = salleId;
         this.disponibilites = disponibilites;
     }
 
     public Salle(SalleDto salleDto) {
+        this.salleId = salleDto.getSalleId();
         this.disponibilites = salleDto.getDisponibilites();
     }
 
@@ -28,5 +30,9 @@ public class Salle {
 
     public List<LocalDateTime> getDisponibilites() {
         return disponibilites;
+    }
+
+    public SalleId getSalleId() {
+        return salleId;
     }
 }

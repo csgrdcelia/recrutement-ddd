@@ -1,17 +1,18 @@
 package common.dto;
 
-import model.Entretien;
+import model.entretien.Entretien;
+import model.entretien.EntretienId;
 
 import java.time.LocalDateTime;
 
 public class EntretienDto {
-    private String id;
+    private EntretienId id;
     private CandidatDto candidat;
     private RecruteurDto recruteur;
     private SalleDto salle;
     private LocalDateTime dateEntretien;
 
-    public EntretienDto(String id, CandidatDto candidat, RecruteurDto recruteur, SalleDto salle, LocalDateTime dateEntretien) {
+    public EntretienDto(EntretienId id, CandidatDto candidat, RecruteurDto recruteur, SalleDto salle, LocalDateTime dateEntretien) {
         this.id = id;
         this.candidat = candidat;
         this.recruteur = recruteur;
@@ -20,7 +21,7 @@ public class EntretienDto {
     }
 
     public EntretienDto(Entretien entretien) {
-        this.id = entretien.getId();
+        this.id = entretien.getEntretienId();
         this.candidat = entretien.getCandidat();
         this.recruteur = entretien.getRecruteur();
         this.salle = entretien.getSalle();

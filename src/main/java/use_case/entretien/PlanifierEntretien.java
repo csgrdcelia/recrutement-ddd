@@ -1,4 +1,4 @@
-package use_case;
+package use_case.entretien;
 
 import common.dto.CandidatDto;
 import common.dto.EntretienDto;
@@ -6,13 +6,17 @@ import common.dto.RecruteurDto;
 import common.dto.SalleDto;
 import infrastructure.exception.AucunRecruteurAdapte;
 import infrastructure.exception.AucuneSalleLibre;
-import model.*;
+import infrastructure.exception.CandidatIntrouvable;
+import model.entretien.Entretien;
+import model.entretien.EntretienId;
+import model.entretien.RequetePlanificateur;
 import model.repository.Candidats;
 import model.repository.Entretiens;
 import model.repository.Recruteurs;
 import model.repository.Salles;
 
 import java.util.List;
+import java.util.UUID;
 
 public class PlanifierEntretien {
     private final Candidats candidats;
@@ -27,14 +31,18 @@ public class PlanifierEntretien {
         this.salles = salles;
     }
 
-    public void planifier(RequetePlanificateur requete) throws AucunRecruteurAdapte, AucuneSalleLibre {
+    public void planifier(RequetePlanificateur requete) throws AucunRecruteurAdapte, AucuneSalleLibre, CandidatIntrouvable {
         // Given
-        CandidatDto candidat = candidats.getCandidatById(requete.getId());
+        CandidatDto candidat = (CandidatDto) candidats.getCandidatById(requete.getCandidatId());
+        if (candidat == null)
+            throw new CandidatIntrouvable(requete.getCandidatId());
+
         List<RecruteurDto> recruteurs = this.recruteurs.findAll();
         List<SalleDto> salles = this.salles.findAll();
 
         // When
-        Entretien entretien = new Entretien(candidat, requete.getDateEntretien());
+        EntretienId entretienId = new EntretienId(UUID.randomUUID().toString());
+        Entretien entretien = new Entretien(entretienId, candidat, requete.getDateEntretien());
         entretien.planifier(recruteurs, salles);
 
         // Then
