@@ -1,7 +1,6 @@
 package common.dto;
 
 import model.Entretien;
-import model.Salle;
 
 import java.time.LocalDateTime;
 
@@ -26,5 +25,17 @@ public class EntretienDto {
         this.recruteur = entretien.getRecruteur();
         this.salle = entretien.getSalle();
         this.dateEntretien = entretien.getDateEntretien();
+    }
+
+    public CandidatDto getCandidat() {
+        return candidat;
+    }
+
+    public RecruteurDto getRecruteur() {
+        return recruteur;
+    }
+
+    public SalleDto getSalle() {
+        return salle;
     }
 }

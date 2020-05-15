@@ -14,7 +14,7 @@ public class SalleDto {
     }
 
     public SalleDto(Salle salle) {
-        this.disponibilites = getDisponibilites();
+        this.disponibilites = salle.getDisponibilites();
     }
 
     public List<LocalDateTime> getDisponibilites() {

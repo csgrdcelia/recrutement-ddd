@@ -1,6 +1,7 @@
 package use_case;
 
 import common.dto.CandidatDto;
+import common.dto.EntretienDto;
 import common.dto.RecruteurDto;
 import common.dto.SalleDto;
 import infrastructure.exception.AucunCandidat;
@@ -20,13 +21,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PlanifierEntretienTest {
@@ -72,20 +69,28 @@ public class PlanifierEntretienTest {
     }
 
     @Test
-    public void testPlanifierShouldReturnCandidat() throws AucunRecruteurAdapte, AucuneSalleLibre {
+    public void testPlanifier() throws AucunRecruteurAdapte, AucuneSalleLibre {
         final CandidatsImpl candidats = new CandidatsImpl();
         final EntretiensImpl entretiens = new EntretiensImpl();
         final RecruteursImpl recruteurs = new RecruteursImpl();
         final SallesImpl salles = new SallesImpl();
+        final String candidatId = "e2bd2071-b2de-449e-b633-ac61662921e2";
+        final LocalDateTime dateEntretien = LocalDateTime.parse("2020-05-15T15:30:00");
 
-        final PlanifierEntretien planifierEntretien = new PlanifierEntretien(candidats, entretiens, recruteurs, salles);
-        String candidatId = "e2bd2071-b2de-449e-b633-ac61662921e2";
-        LocalDateTime dateEntretien = LocalDateTime.parse("2020-05-15T15:30:00");
         final RequetePlanificateur requete = new RequetePlanificateur(candidatId, dateEntretien);
+        final PlanifierEntretien planifierEntretien = new PlanifierEntretien(candidats, entretiens, recruteurs, salles);
+
         planifierEntretien.planifier(requete);
 
-//        entretiens.getAll().contains()
-        assertTrue(true);
+        Optional<EntretienDto> optionalEntretienDto = entretiens.findAll().stream().filter(entretien -> entretien.getCandidat().getId().equals(candidatId)).findFirst();
+
+        assertTrue(optionalEntretienDto.isPresent());
+
+        EntretienDto entretienDto = optionalEntretienDto.get();
+
+        assertEquals("python", entretienDto.getRecruteur().getCompetence());
+        assertFalse(entretienDto.getRecruteur().getDisponibilites().contains(dateEntretien));
+        assertFalse(entretienDto.getSalle().getDisponibilites().contains(dateEntretien));
     }
 
     @Test

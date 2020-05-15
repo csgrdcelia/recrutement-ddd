@@ -12,9 +12,6 @@ public class RecruteurDto {
     private String competence;
     private int nbAnneeExperience;
 
-    public RecruteurDto() {
-    }
-
     public RecruteurDto(List<LocalDateTime> disponibilites, String competence, int nbAnneeExperience) {
         this.id = UUID.randomUUID().toString();
         this.disponibilites = disponibilites;

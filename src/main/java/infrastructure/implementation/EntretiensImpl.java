@@ -16,7 +16,7 @@ public class EntretiensImpl implements Entretiens {
     }
 
     @Override
-    public List<EntretienDto> getAll() {
+    public List<EntretienDto> findAll() {
         return entretiens;
     }
 }

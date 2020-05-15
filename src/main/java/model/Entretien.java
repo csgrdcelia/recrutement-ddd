@@ -29,11 +29,12 @@ public class Entretien {
 
     public void planifier(List<RecruteurDto> recruteurs, List<SalleDto> salles) throws AucunRecruteurAdapte, AucuneSalleLibre {
         Salle salle = getSallePourDate(salles, dateEntretien);
-        salle.reserver();
+        salle.reserver(dateEntretien);
 
         Recruteur recruteur = getRecruteurPourCandidat(recruteurs, candidat, dateEntretien);
         recruteur.reserver(dateEntretien);
-        this.recruteur = new RecruteurDto();
+
+        this.recruteur = new RecruteurDto(recruteur);
         this.salle = new SalleDto(salle);
 
         status = "planifié";

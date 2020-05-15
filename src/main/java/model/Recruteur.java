@@ -34,7 +34,8 @@ public class Recruteur {
     }
 
     public void reserver(LocalDateTime dateEntretien) {
-        //TODO: remove disponibility
+        disponibilites.remove(dateEntretien);
+        //TODO: test
     }
 
     public String getId() {
@@ -50,7 +51,7 @@ public class Recruteur {
     }
 
     public boolean estDisponible(LocalDateTime dateEntretien) {
-        return this.getDisponibilites().stream().filter(disponibilite -> disponibilite.equals(dateEntretien)).count() == 1;
+        return this.disponibilites.stream().filter(disponibilite -> disponibilite.equals(dateEntretien)).count() == 1;
     }
 
     public int getNbAnneeExperience() {

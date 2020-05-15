@@ -14,16 +14,4 @@ public class Candidat {
         this.competence = competence;
         this.nbAnneeExperience = nbAnneeExperience;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getCompetence() {
-        return competence;
-    }
-
-    public int getNbAnneeExperience() {
-        return nbAnneeExperience;
-    }
 }
