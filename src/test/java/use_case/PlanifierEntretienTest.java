@@ -4,10 +4,7 @@ import common.dto.CandidatDto;
 import common.dto.EntretienDto;
 import common.dto.RecruteurDto;
 import common.dto.SalleDto;
-import infrastructure.exception.AucunCandidat;
-import infrastructure.exception.AucunRecruteurAdapte;
-import infrastructure.exception.AucuneSalleLibre;
-import infrastructure.exception.CandidatIntrouvable;
+import infrastructure.exception.*;
 import infrastructure.implementation.CandidatsImpl;
 import infrastructure.implementation.EntretiensImpl;
 import infrastructure.implementation.RecruteursImpl;
@@ -16,6 +13,10 @@ import model.entretien.CandidatId;
 import model.entretien.RecruteurId;
 import model.entretien.RequetePlanificateur;
 import model.entretien.SalleId;
+import model.repository.Candidats;
+import model.repository.Entretiens;
+import model.repository.Recruteurs;
+import model.repository.Salles;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,11 +75,11 @@ public class PlanifierEntretienTest {
     }
 
     @Test
-    public void testPlanifier() throws AucunRecruteurAdapte, AucuneSalleLibre, CandidatIntrouvable {
-        final CandidatsImpl candidats = new CandidatsImpl();
-        final EntretiensImpl entretiens = new EntretiensImpl();
-        final RecruteursImpl recruteurs = new RecruteursImpl();
-        final SallesImpl salles = new SallesImpl();
+    public void testPlanifier() throws AucunRecruteurAdapte, AucuneSalleLibre, CandidatIntrouvable, RecruteurIndisponible, SalleIndisponible {
+        final Candidats candidats = new CandidatsImpl();
+        final Entretiens entretiens = new EntretiensImpl();
+        final Recruteurs recruteurs = new RecruteursImpl();
+        final Salles salles = new SallesImpl();
         final CandidatId candidatId = new CandidatId("e2bd2071-b2de-449e-b633-ac61662921e2");
         final LocalDateTime dateEntretien = LocalDateTime.parse("2020-05-15T15:30:00");
 
@@ -94,16 +95,8 @@ public class PlanifierEntretienTest {
         EntretienDto entretienDto = optionalEntretienDto.get();
 
         assertEquals("python", entretienDto.getRecruteur().getCompetence());
+
         assertFalse(entretienDto.getRecruteur().getDisponibilites().contains(dateEntretien));
         assertFalse(entretienDto.getSalle().getDisponibilites().contains(dateEntretien));
     }
-
-    @Test
-    public void testGetCandidatShouldReturnCandidat() throws AucunCandidat {
-        final CandidatsImpl candidats = new CandidatsImpl();
-        CandidatDto candidatDto = candidats.getCandidatById(new CandidatId("e2bd2071-b2de-449e-b633-ac61662921e2"));
-        assertEquals("e2bd2071-b2de-449e-b633-ac61662921e2", candidatDto.getCandidatId());
-    }
-
-
 }

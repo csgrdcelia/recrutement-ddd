@@ -2,6 +2,7 @@ package model.entretien;
 
 import common.dto.CandidatDto;
 import common.dto.RecruteurDto;
+import infrastructure.exception.RecruteurIndisponible;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,8 +33,14 @@ public class Recruteur {
                 this.getNbAnneeExperience() > candidat.getNbAnneeExperience();
     }
 
-    public void reserver(LocalDateTime dateEntretien) {
+    public void reserver(LocalDateTime dateEntretien) throws RecruteurIndisponible {
+        if (!estDisponible(dateEntretien))
+            throw new RecruteurIndisponible(dateEntretien);
         disponibilites.remove(dateEntretien);
+    }
+
+    public boolean estDisponible(LocalDateTime dateEntretien) {
+        return this.disponibilites.stream().filter(disponibilite -> disponibilite.equals(dateEntretien)).count() == 1;
     }
 
     public RecruteurId getRecruteurId() {
@@ -46,10 +53,6 @@ public class Recruteur {
 
     public String getCompetence() {
         return competence;
-    }
-
-    public boolean estDisponible(LocalDateTime dateEntretien) {
-        return this.disponibilites.stream().filter(disponibilite -> disponibilite.equals(dateEntretien)).count() == 1;
     }
 
     public int getNbAnneeExperience() {

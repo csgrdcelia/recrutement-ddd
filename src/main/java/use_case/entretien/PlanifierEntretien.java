@@ -4,9 +4,7 @@ import common.dto.CandidatDto;
 import common.dto.EntretienDto;
 import common.dto.RecruteurDto;
 import common.dto.SalleDto;
-import infrastructure.exception.AucunRecruteurAdapte;
-import infrastructure.exception.AucuneSalleLibre;
-import infrastructure.exception.CandidatIntrouvable;
+import infrastructure.exception.*;
 import model.entretien.Entretien;
 import model.entretien.EntretienId;
 import model.entretien.RequetePlanificateur;
@@ -31,9 +29,9 @@ public class PlanifierEntretien {
         this.salles = salles;
     }
 
-    public void planifier(RequetePlanificateur requete) throws AucunRecruteurAdapte, AucuneSalleLibre, CandidatIntrouvable {
+    public void planifier(RequetePlanificateur requete) throws AucunRecruteurAdapte, AucuneSalleLibre, CandidatIntrouvable, RecruteurIndisponible, SalleIndisponible {
         // Given
-        CandidatDto candidat = (CandidatDto) candidats.getCandidatById(requete.getCandidatId());
+        CandidatDto candidat = candidats.getCandidatById(requete.getCandidatId());
         if (candidat == null)
             throw new CandidatIntrouvable(requete.getCandidatId());
 

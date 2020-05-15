@@ -5,6 +5,8 @@ import common.dto.RecruteurDto;
 import common.dto.SalleDto;
 import infrastructure.exception.AucunRecruteurAdapte;
 import infrastructure.exception.AucuneSalleLibre;
+import infrastructure.exception.RecruteurIndisponible;
+import infrastructure.exception.SalleIndisponible;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +18,6 @@ public class Entretien {
     private RecruteurDto recruteur;
     private SalleDto salle;
     private LocalDateTime dateEntretien;
-    private String status;
 
     public Entretien(EntretienId entretienId, CandidatDto candidat, LocalDateTime dateEntretien) {
         this.entretienId = entretienId;
@@ -24,7 +25,7 @@ public class Entretien {
         this.dateEntretien = dateEntretien;
     }
 
-    public void planifier(List<RecruteurDto> recruteurs, List<SalleDto> salles) throws AucunRecruteurAdapte, AucuneSalleLibre {
+    public void planifier(List<RecruteurDto> recruteurs, List<SalleDto> salles) throws AucunRecruteurAdapte, AucuneSalleLibre, RecruteurIndisponible, SalleIndisponible {
         Salle salle = getSallePourDate(salles, dateEntretien);
         salle.reserver(dateEntretien);
 
@@ -33,23 +34,6 @@ public class Entretien {
 
         this.recruteur = new RecruteurDto(recruteur);
         this.salle = new SalleDto(salle);
-
-        status = "planifié";
-    }
-
-    public void confirmer() {
-        status = "confirmé";
-        // TODO: verify
-    }
-
-    public void annuler() {
-        status = "annulé";
-        // TODO: verify
-    }
-
-    public void reporter() {
-        status = "reporté";
-        // TODO: verify
     }
 
     private Recruteur getRecruteurPourCandidat(List<RecruteurDto> recruteurs, CandidatDto candidat, LocalDateTime dateEntretien) throws AucunRecruteurAdapte {
@@ -97,9 +81,5 @@ public class Entretien {
 
     public LocalDateTime getDateEntretien() {
         return dateEntretien;
-    }
-
-    public String getStatus() {
-        return status;
     }
 }

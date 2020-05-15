@@ -1,6 +1,7 @@
 package model.entretien;
 
 import common.dto.SalleDto;
+import infrastructure.exception.SalleIndisponible;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,9 +20,10 @@ public class Salle {
         this.disponibilites = salleDto.getDisponibilites();
     }
 
-    public void reserver(LocalDateTime date) {
+    public void reserver(LocalDateTime date) throws SalleIndisponible{
+        if (!estLibre(date))
+            throw new SalleIndisponible(date);
         disponibilites.remove(date);
-        //TODO: test
     }
 
     public boolean estLibre(LocalDateTime dateEntretien) {
