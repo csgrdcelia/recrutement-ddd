@@ -20,4 +20,11 @@ public class SalleDto {
     public List<LocalDateTime> getDisponibilites() {
         return disponibilites;
     }
+
+    @Override
+    public String toString() {
+        return "SalleDto{" +
+                "disponibilites=" + disponibilites +
+                '}';
+    }
 }

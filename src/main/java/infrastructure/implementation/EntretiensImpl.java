@@ -14,4 +14,9 @@ public class EntretiensImpl implements Entretiens {
     public void add(EntretienDto entretien) {
         entretiens.add(entretien);
     }
+
+    @Override
+    public List<EntretienDto> getAll() {
+        return entretiens;
+    }
 }

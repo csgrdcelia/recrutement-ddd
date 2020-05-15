@@ -8,8 +8,8 @@ public class CandidatDto {
     private String competence;
     private int nbAnneeExperience;
 
-    public CandidatDto(String nom, String competence) {
-        this.id = UUID.randomUUID().toString();
+    public CandidatDto(String id, String nom, String competence) {
+        this.id = id;
         this.nom = nom;
         this.competence = competence;
     }

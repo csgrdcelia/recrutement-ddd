@@ -11,11 +11,11 @@ import java.util.List;
 
 public class SallesImpl implements Salles {
     private final List<SalleDto> salles = new ArrayList<>(Arrays.asList(
-            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.now()))),
-            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.now()))),
-            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.now()))),
-            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.now()))),
-            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.now())))));
+            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.parse("2020-05-15T15:30:00")))),
+            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.parse("2020-05-15T15:30:00")))),
+            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.parse("2020-05-15T15:30:00")))),
+            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.parse("2020-05-15T15:30:00")))),
+            new SalleDto(new ArrayList<>(Arrays.asList(LocalDateTime.parse("2020-05-15T15:30:00"))))));
 
     public List<SalleDto> findAll() {
         return salles;
